@@ -32,14 +32,20 @@ namespace MultiFileGrep
         {
 
         }
+
+        /// <summary>Application Exit</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Application.Exit();
         }
+
         private void copyToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
+
         /// <summary>åüçıé¿çs</summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -51,9 +57,12 @@ namespace MultiFileGrep
             iSearchTable = (DataTable)dataGridView1.DataSource;
             foreach (DataRow dr in iSearchTable.Rows)
             {
-                string sarchWord = dr["SearchValue"].ToString();
-                List<string> rl = FileGrep(PathTextBox.Text, sarchWord);
-                SetResultList(sarchWord, rl);
+                string? sarchWord = dr["SearchValue"].ToString();
+                if (sarchWord != null)
+                {
+                    List<string> rl = FileGrep(PathTextBox.Text, sarchWord);
+                    SetResultList(sarchWord, rl);
+                }
             }
         }
         private List<string> FileGrep(string pTargetPath, string pSearchWord)
